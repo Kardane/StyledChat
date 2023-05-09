@@ -35,7 +35,7 @@ public class Commands {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
         dispatcher.register(
                 literal("styledchat")
-                        .requires(Permissions.require("styledchat.main", true))
+                        .requires(Permissions.require("styledchat.main", 2))
                         .executes(Commands::about)
 
                         .then(literal("reload")
@@ -44,7 +44,7 @@ public class Commands {
                         )
 
                         .then(literal("set")
-                                .requires(Permissions.require("styledchat.set", 3))
+                                .requires(Permissions.require("styledchat.set", 2))
                                 .then(fillWithProperties(argument("players", EntityArgumentType.players()),
                                         (x, p) -> x.then(argument("value", StringArgumentType.greedyString())
                                                 .executes((ctx) -> Commands.setProperty(ctx, p.apply(ctx)))
@@ -60,7 +60,7 @@ public class Commands {
                         )
 
                         .then(literal("clear")
-                                .requires(Permissions.require("styledchat.clear", 3))
+                                .requires(Permissions.require("styledchat.clear", 2))
                                 .then(fillWithProperties(argument("players", EntityArgumentType.players()),
                                         (x, p) -> x.executes((ctx) -> Commands.clearProperty(ctx, p.apply(ctx)))
                                 ).then(literal("*").executes((ctx) -> Commands.clearProperty(ctx, null))))
